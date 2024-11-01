@@ -3,20 +3,27 @@ package ru.clevertec.calculator;
 import jakarta.servlet.*;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.logging.Logger;
 
 public class LoggingFilter implements Filter {
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        Filter.super.init(filterConfig);
+    private static final Logger LOG = Logger.getLogger(LoggingFilter.class.getName());
+
+    protected void logRequestParameter(String paramName, String paramValues) {
+        LOG.info("Request parameter " + paramName + ": " + paramValues);
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        Enumeration<String> parameterNames = request.getParameterNames();
 
-    }
-
-    @Override
-    public void destroy() {
-        Filter.super.destroy();
+        while (parameterNames.hasMoreElements()) {
+            String paramName = parameterNames.nextElement();
+            String paramValues = Arrays.toString(request.getParameterValues(paramName));
+            logRequestParameter(paramName, paramValues);
+        }
+        chain.doFilter(request, response);
     }
 }

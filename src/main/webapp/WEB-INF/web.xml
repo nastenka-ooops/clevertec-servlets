@@ -4,12 +4,10 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
 
-
     <request-character-encoding>UTF-8</request-character-encoding>
     <response-character-encoding>UTF-8</response-character-encoding>
 
     <servlet>
-        <description></description>
         <display-name>CalculatorServlet</display-name>
         <servlet-name>CalculatorServlet</servlet-name>
         <servlet-class>ru.clevertec.calculator.CalculatorServlet</servlet-class>
@@ -47,7 +45,7 @@
 
     <filter>
         <filter-name>LoggingFilter</filter-name>
-        <filter-class>ru.clevertec.calculator.ValidationFilter</filter-class>
+        <filter-class>ru.clevertec.calculator.LoggingFilter</filter-class>
     </filter>
 
     <filter-mapping>
